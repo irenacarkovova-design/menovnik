@@ -15,6 +15,11 @@ function calculate(data) {
 async function updateRates() {
     const apiURL = 'https://open.er-api.com/v6/latest/CZK';
 
+    if (!navigator.onLine) {
+        nactiZPameti("Pracujete offline (používám starší kurzy)");
+        return; 
+    }
+
     try {
         const response = await fetch(apiURL);
         const data = await response.json();
@@ -24,14 +29,17 @@ async function updateRates() {
         calculate(data);
     } 
     catch (error) {
-        const cashedData = localStorage.getItem('cashedRates');
-        if (cashedData) {
-            const data = JSON.parse(cashedData);
-            statusp.innerText = "Offline režim: Používám starší kurz."; 
-            calculate(data);
-        } else {
-            resultdiv.innerText = "Nelze načíst kurzy. Jste offline.";
+        nactiZPameti("Offline režim: Kurzy z paměti.");
         }
+    }
+function nactiZPameti(zprava) {
+    const cashedData = localStorage.getItem('cashedRates');
+    if (cashedData) {
+        const data = JSON.parse(cashedData);
+        statusp.innerText = zprava;
+        calculate(data);
+    } else {
+        resultdiv.innerText = "Nelze načíst kurzy. Jste offline a paměť je prázdná.";
     }
 }
 
