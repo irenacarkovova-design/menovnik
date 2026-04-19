@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <title>Měnovník</title>
+</head>
+<body>
+    <div class="app-container">
+        <h1>Měnovník</h1>
+        <div class="converter">
+            <input type="number" id="amount" placeholder="Zadejte částku" value="1" />
+            <select id="fromCurrency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="CZK">CZK</option>
+                <option value="ILS">ILS</option>
+            </select>
+            <span class="arrow">→</span>
+            
+            <select id="toCurrency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="CZK">CZK</option>
+                <option value="ILS">ILS</option>
+            </select>
+        
+        <div id="result">Načítám kurzy...</div>
+        <p id="status info"></p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
