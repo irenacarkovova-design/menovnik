@@ -50,3 +50,16 @@ arrow {
     font-size: 0.85rem;
     color: #70757a;
 }
+.calculator-section {
+    margin-top: 20px;
+    padding-top: 10px;
+}
+h2 {
+    color: #555;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+.calculator-section div {
+    display: flex;
+    justify-content: space-between;
+}
