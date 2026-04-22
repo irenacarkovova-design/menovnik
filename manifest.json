@@ -1,14 +1,21 @@
 {
-    "name": "Měnovník",
+    "name": "Měnovník a Časovač",
     "short_name": "Měny",
-    "start_url": "index.html",
+    "start_url": "./index.html",
     "display": "standalone",
+    "orientation": "portrait",
     "background_color": "#f4f4f4",
     "theme_color": "#2196F3",
     "icons": [
         {
-            "src": "https://via.placeholder.com/192",
+            "src": "https://via.placeholder.com/192.png",
             "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "https://via.placeholder.com/512.png",
+            "sizes": "512x512",
             "type": "image/png"
         }
     ]   
