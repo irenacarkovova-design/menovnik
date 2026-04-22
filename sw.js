@@ -1,4 +1,4 @@
-const cacheName = 'menovnik-v1';
+const cacheName = 'menovnik-v2';
 const assets = [
   './',
   './index.html',
