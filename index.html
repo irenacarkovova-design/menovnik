@@ -31,6 +31,16 @@
         <p id="status info"></p>
     </div>
 
+    <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
+
+    <div class="calculator-section">
+        <h2>Čas na desetinné číslo</h2>
+        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+            <input type="number" id="hoursInput" placeholder="Hodiny" min="0" value="0" />
+            <input type="number" id="minutesInput" placeholder="Minuty" min="0" max="59" value="0" />
+        </div>
+        <div id="timeResult" style="font-size: 1.5rem; font-weight: bold; color: #1a73e8;">0.00 h</div>
+    </div>
     <script src="app.js"></script>
 </body>
 </html>
