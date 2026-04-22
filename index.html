@@ -35,11 +35,11 @@
 
     <div class="calculator-section">
         <h2>Čas na desetinné číslo</h2>
-        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-            <input type="number" id="hoursInput" placeholder="Hodiny" min="0" value="0" />
-            <input type="number" id="minutesInput" placeholder="Minuty" min="0" max="59" value="0" />
+        <div class="time-inputs">
+            <input type="number" id="hoursInput" placeholder="Hodiny" value="0" />
+            <input type="number" id="minutesInput" placeholder="Minuty" value="0" />
         </div>
-        <div id="timeResult" style="font-size: 1.5rem; font-weight: bold; color: #1a73e8;">0.00 h</div>
+        <div id="timeResult">0.00 h</div>
     </div>
     <script src="app.js"></script>
 </body>
