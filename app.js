@@ -1,23 +1,23 @@
-// --- MĚNOVÝ PŘEVODNÍK ---
+// --- 1. DEFINICE PROMĚNNÝCH ---
 const amountinput = document.getElementById("amount");
 const fromselect = document.getElementById("fromCurrency");
 const toselect = document.getElementById("toCurrency");
 const resultdiv = document.getElementById("result");
 const statusp = document.getElementById("status-info");
 
-// --- ČASOVÁ KALKULAČKA ---
 const hoursInput = document.getElementById("hoursInput");
 const minutesInput = document.getElementById("minutesInput");
 const timeResult = document.getElementById("timeResult");
 
-// Logika pro měny
+// --- 2. LOGIKA PRO KURZY ---
 function calculate(data) {
     if (!data || !data.rates) return;
     const from = fromselect.value;
     const to = toselect.value;
     const rate = data.rates[to] / data.rates[from];
-    const result = (amountinput.value * rate).toFixed(2);
-    resultdiv.innerText = `${amountinput.value} ${from} = ${result} ${to}`;    
+    const amount = parseFloat(amountinput.value) || 0;
+    const result = (amount * rate).toFixed(2);
+    resultdiv.innerText = `${amount} ${from} = ${result} ${to}`;    
 }
 
 async function updateRates() {
@@ -33,33 +33,45 @@ async function updateRates() {
         if (cached) {
             statusp.innerText = "Režim offline (starší kurzy).";
             calculate(JSON.parse(cached));
+        } else {
+            statusp.innerText = "Jste offline a nemáte uložená data.";
         }
     }
 }
 
-// Logika pro čas (TADY JE TA OPRAVA)
+// --- 3. LOGIKA PRO ČAS ---
 function convertTime() {
     const h = parseFloat(hoursInput.value) || 0;
     const m = parseFloat(minutesInput.value) || 0;
     const decimal = h + (m / 60);
-    timeResult.innerText = decimal.toFixed(2) + " h";
+    if (timeResult) {
+        timeResult.innerText = decimal.toFixed(2) + " h";
+    }
 }
 
-// Event Listenery
+// --- 4. EVENT LISTENERY (HLÍDAČE) ---
+
+// Hlídače pro měny
 [amountinput, fromselect, toselect].forEach(el => {
-    el.addEventListener('input', () => {
-        const data = JSON.parse(localStorage.getItem('cashedRates'));
-        calculate(data);
-    });
+    if (el) {
+        el.addEventListener('input', () => {
+            const cached = localStorage.getItem('cashedRates');
+            if (cached) calculate(JSON.parse(cached));
+        });
+    }
 });
 
-hoursInput.addEventListener('input', convertTime);
-minutesInput.addEventListener('input', convertTime);
+// Hlídače pro čas
+if (hoursInput && minutesInput) {
+    hoursInput.addEventListener('input', convertTime);
+    minutesInput.addEventListener('input', convertTime);
+}
 
-// Spuštění
+// --- 5. SPUŠTĚNÍ PŘI STARTU ---
 updateRates();
+convertTime();
 
-// Registrace SW
+// Registrace Service Workeru
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
+    navigator.serviceWorker.register('sw.js').catch(err => console.log(err));
 }
